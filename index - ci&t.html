@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Front-end - CIT</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+	<link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+	<div id="content" class="jumbotron text-center container">
+		<header>
+			<h1>CI&T</h1>
+			<hr>
+			<h2>My TODO List</h2>
+
+			<form id="form-nova-tarefa" class="form-inline">
+				<div class="input-group">
+					<input type="text" name="input-nova-tarefa" id="input-nova-tarefa" class="form-control" size="50"
+						placeholder="Descrição:" required />
+					<div class="input-group-btn">
+						<input type="submit" id="enviar-nova-tarefa" class="btn btn-danger" value="Cadastrar" />
+					</div>
+				</div>
+			</form>
+		</header>
+		<main>
+			<section class="task-list">
+				
+				<h2>Tarefas</h2>
+
+				<div id="tarefas">
+
+
+
+				</div>
+				<h3>Tarefas finalizadas</h3>
+
+				<div id="tarefas-finalizadas">
+
+
+
+				</div>
+
+			</section>
+
+
+			<a id="selectAll">
+				<input class="botoesfinais" type="button" value="Selecionar Todos" id="sel-t" name="sel-t">
+			</a>
+			<a id="removeSelected">
+				<input class="botoesfinais" type="button" value="Finalizar Selecionados" id="fim-s" name="fim-s">
+			</a>
+
+
+		</main>
+	</div>
+	<script src="main.js"></script>
+</body>
+
+</html>
