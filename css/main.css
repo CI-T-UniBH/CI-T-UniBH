@@ -6,7 +6,7 @@
 	--pink: #EC4899;
 	--purple: #8B5CF6;
 	--light: #EEE;
-
+	--red: #ff0000;
 }
 
 * {
@@ -20,11 +20,11 @@ body {
 	flex-direction: column;
 	min-height: 100vh;
 	color: #FFF;
-	background-color: var(--white);
+	background-color: var(--light);
 }
 
 header {
-	padding: 2rem 1rem;
+	padding: 1rem 3rem;
 	max-width: 800px;
 	width: 100%;
 	color: var(--dark);
@@ -39,7 +39,7 @@ header h1{
 }
 
 #form-nova-tarefa {
-	display: flex;
+	display: block;
 }
 
 input, button {
@@ -50,9 +50,10 @@ input, button {
 }
 
 .botoesfinais {
-
+  padding: 10px;
 	color: #ff0000;
 	border: solid;
+	border-radius: 15px;
 	outline: none;
 	background: none;
 }
@@ -60,16 +61,16 @@ input, button {
 
 #input-nova-tarefa {
 	flex: 1 1 0%;
-	background-color: var(--darker);
+	border-color: red;
 	padding: 1rem;
 	border-radius: 1rem;
 	margin-right: 1rem;
-	color: var(--light);
+	color: var(--red);
 	font-size: 1.25rem;
 }
 
 #input-nova-tarefa::placeholder {
-	color: var(--grey);
+	color: var(--red);
 }
 
 #enviar-nova-tarefa {
@@ -120,7 +121,7 @@ main {
 #tarefas .tarefa {
 	display: flex;
 	justify-content: space-between;
-	background-color: var(--darkest);
+	background-color: #0ddfdfcc;
 	padding: 1rem;
 	border-radius: 1rem;
 	margin-bottom: 1rem;
@@ -189,5 +190,26 @@ main {
 	color: green;
 }
 
-
-
+body{
+	color: #333333;
+	font-family: "Lucida    Sans    Unicode", "Lucida   Grande", sans-serif;
+	padding: 20px 0px 10px;
+	background: linear-gradient(#fd1e44, #ff4554c4);
+  }
+  
+  .container  {
+	margin: 20 auto;
+	width: 940px;
+  }
+  
+  form {
+	padding: 20px 0px 50px 0px;
+  }
+  
+  #content {
+	box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+	border-radius: 0.5rem;
+	background: white;
+  }
+  
+  
