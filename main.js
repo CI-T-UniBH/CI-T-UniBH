@@ -1,106 +1,96 @@
 window.addEventListener('load', () => {
-	const form = document.querySelector("#form-nova-tarefa");
-	const input = document.querySelector("#input-nova-tarefa");
-	const list_el = document.querySelector("#tarefas");
+    const form = document.querySelector("#form-nova-tarefa");
+    const input = document.querySelector("#input-nova-tarefa");
 
+    // Setup - add a text input to each footer cell
+    $('#tabela tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
+    } );
+    $('#tabela').DataTable({
+        initComplete: function () {
+            // Apply the search
+            this.api().columns().every( function () {
+                var that = this;
+ 
+                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
+        },
+        "language": {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "Não foi localizado nenhum registro.",
+                "info": "Mostrando registros de _START_ até _END_ de um total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros de 0 até 0 de um total de 0 registros",
+                "infoFiltered": "(filtrado de um total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primeiro",
+                    "sLast":"Último",
+                    "sNext":"Próximo",
+                    "sPrevious": "Anterior"
+                 },
+                 "sProcessing":"Processando...",
+            },
+            'dom': 'Bfrtip',
+            'buttons': [
+                { extend: 'copy', text: 'Copiar a tabela' },
+                { extend: 'csv', text: 'CSV' },
+                { extend: 'excel', text: 'Excel' },
+                { extend: 'print', text: 'Imprimir' },
+            ]
+    });  
 
-	form.addEventListener('submit', (e) => {
-		e.preventDefault();
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        var formData = new FormData();    
+        formData.append( 'tarefa', input.value );
 
-		const tarefa = input.value;
-		
-		if (tarefa == '') {
-			
-			alert("Escreva uma tarefa");
-			return false;
-		}
-
-		const task_el = document.createElement('div');
-		task_el.classList.add('tarefa');
-
-		const task_content_el = document.createElement('div');
-		task_content_el.classList.add('content');
-
-
-		task_el.appendChild(task_content_el); 
-		
-
-		const task_input_el = document.createElement('input');
-		task_input_el.classList.add('text');
-		task_input_el.type = 'text';
-		task_input_el.value = tarefa;
-		task_input_el.setAttribute('readonly', 'readonly');
-
-		task_content_el.appendChild(task_input_el); //criação de uma nova tarefa
-
-
-		const task_actions_el = document.createElement('div');
-		task_actions_el.classList.add('acao');
-		
-
-		
-		const task_edit_el = document.createElement('button'); //criação do botão de editar tarefa
-		task_edit_el.classList.add('editar');
-		task_edit_el.innerText = 'Editar';
-
-		const task_delete_el = document.createElement('button'); //criação do botão de excluir tarefa
-		task_delete_el.classList.add('excluir');
-		task_delete_el.innerText = 'Excluir';
-		
-		const task_end_el = document.createElement('button'); //criação do botão de finalizar tarefa
-		task_end_el.classList.add('finalizar');
-		task_end_el.innerText = 'Finalizar';
-
-		task_actions_el.appendChild(task_edit_el);
-		task_actions_el.appendChild(task_delete_el);
-		task_actions_el.appendChild(task_end_el);
-
-		task_el.appendChild(task_actions_el);
-		list_el.appendChild(task_el);
-
-		
-		const finished_list_el = document.querySelector("#tarefas-finalizadas");
-	
-		task_end_el.addEventListener('click', (e) => {
-			
-			task_actions_el.removeChild(task_edit_el);
-			task_actions_el.removeChild(task_end_el);
-			task_content_el.appendChild(task_input_el);
-			finished_list_el.appendChild(task_el);
-
-		});
-		
-		
-		
-		input.value = '';
-
-		task_edit_el.addEventListener('click', (e) => {
-			if (task_edit_el.innerText.toLowerCase() == "editar") {
-				task_edit_el.innerText = "Salvar";
-				task_input_el.removeAttribute("readonly");
-				task_input_el.focus();
-			} else {
-				task_edit_el.innerText = "Editar";
-				task_input_el.setAttribute("readonly", "readonly");
-			}
-		});
-
-		task_delete_el.addEventListener('click', (e) => {
-
-			list_el.removeChild(task_el);
-			
-		});
-		
-		task_delete_el.addEventListener('click', (e) => {
-
-			finished_list_el.removeChild(task_el);
-			
-		});
-		
-		
-
-		
-		
-		
-	});
+        /*
+        if(listCheckBox.value == 'Category'){
+            $.ajax({
+                url:"src/buscaCategoria.php",
+                method:"POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data){
+                    alert(data);
+                }
+            });
+        } else if(listCheckBox.value == 'Question'){
+            $.ajax({
+                url:"src/buscaQuestao.php",
+                method:"POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data){
+                    alert(data);
+                }
+            });
+        } else if(listCheckBox.value == 'User'){
+            alert("API não disponibilizada.");
+        } else{
+            alert('Argumento inválido.');
+        }
+        */
+        $.ajax({
+            url:"src/inserirTarefa.php",
+            method:"POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data){
+                alert(data);
+                location.reload();
+            }
+        });
+    });
 });
