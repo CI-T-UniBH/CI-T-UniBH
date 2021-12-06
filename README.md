@@ -11,9 +11,9 @@
 - Os itens finalizados deverão ser apresentados em uma cor diferente dos demais itens na lista - &#10003;
 - Criar uma opção para selecionar todos os itens da lista e um botão para finalizar todos com uma única ação - &#10003;
 
-Abaixo pode ser visto um wireframe de como essa tela pode ser construída:
+Tela final do frontend:
 
-![Wireframe TODO List App](./images/wireframe-todolist-app.png)
+![Desafio Final](./images/wireframe-todolist-app.png)
 
 ### Backend
 
